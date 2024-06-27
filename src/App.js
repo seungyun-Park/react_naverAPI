@@ -15,6 +15,7 @@ import ProtectedRoute from './route/ProtectedRoute';
 import PostEditPage from './pages/PostEditPage';
 import BanPage from './pages/BanPage';
 import MyRecommendPage from './pages/MyRecommendPage';
+import MapPage from './pages/MapPage';
 
 function App() {
   return (
@@ -25,97 +26,105 @@ function App() {
         <Route 
           path="/home" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <HomePage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/complain" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <ComplainPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/report" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <ReportPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/hot" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <HotPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/announce" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <AnnouncementPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/post-write" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <PostWritePage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/post/:postId" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <PostViewPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/edit-post/:postId"
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <PostEditPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/info" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <MyInfoPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/mypost" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <MyPostPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/ban" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <BanPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } 
         />
         <Route 
           path="/myrecommend" 
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <MyRecommendPage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/map" 
+          element={
+            //<ProtectedRoute>
+              <MapPage />
+            //</ProtectedRoute>
           } 
         />
       </Routes>

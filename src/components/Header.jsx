@@ -103,6 +103,7 @@ function Header(){
         <Linkto to="/report">제보 게시판</Linkto>
         <Linkto to="/hot">HOT 게시판</Linkto>
         <Linkto to="/announce">공지사항</Linkto>
+        <Linkto to="/map">지도</Linkto>
       </Navigation>
     </SecondHeaderWrapper>
     </>
