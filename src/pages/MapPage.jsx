@@ -60,7 +60,7 @@ function MapPage() {
   useEffect(() => {
     const { naver } = window;
     const mapOptions = {
-      center: new naver.maps.LatLng(37.52133, 126.9522),
+      center: new naver.maps.LatLng(43.52133, 126.9522),
       zoom: 17,
     };
 
@@ -81,7 +81,7 @@ function MapPage() {
       <RedLine />
       <Container>
       <NavermapsProvider
-        ncpClientId="13lmt62yuw" // 여기에 클라이언트 아이디를 입력하세요
+        ncpClientId= {process.env.MY_CLIENT_ID} // 여기에 클라이언트 아이디를 입력하세요
         error={<p>Maps Load Error</p>}
         loading={<p>Maps Loading...</p>}
       >
