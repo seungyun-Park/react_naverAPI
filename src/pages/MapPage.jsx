@@ -2,9 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import { NavermapsProvider } from 'react-naver-maps'; // 패키지 불러오기
+import { NavermapsProvider } from 'react-naver-maps';
 import { Container as MapDiv, NaverMap, Marker } from 'react-naver-maps';
-import { PiStudentLight } from 'react-icons/pi';
 
 const TitleContainer = styled.div`
   display: flex;
@@ -60,7 +59,7 @@ function MapPage() {
   useEffect(() => {
     const { naver } = window;
     const mapOptions = {
-      center: new naver.maps.LatLng(43.52133, 126.9522),
+      center: new naver.maps.LatLng(37.52133, 126.9522),
       zoom: 17,
     };
 
@@ -80,22 +79,29 @@ function MapPage() {
       </TitleContainer>
       <RedLine />
       <Container>
-      <NavermapsProvider
-        ncpClientId= {process.env.MY_CLIENT_ID} // 여기에 클라이언트 아이디를 입력하세요
-        error={<p>Maps Load Error</p>}
-        loading={<p>Maps Loading...</p>}
-      >
-        <MapDiv style={{ width: '70%', height: '70vh', display: 'flex', justifyContent: 'center' }} >
-        <MapContainer ref={mapRef} id="map">
-          <NaverMap
-            id="react-naver-maps-introduction"
-            style={{ width: '100%', height: '100vh' }}
-            center={{ lat: 37.52133, lng: 126.9522 }}
-            zoom={17}
-          />
-        </MapContainer>
-        </MapDiv>
-      </NavermapsProvider>
+        <NavermapsProvider
+          ncpClientId={process.env.MY_CLIENT_ID} // 여기에 클라이언트 아이디를 입력하세요
+          error={<p>Maps Load Error</p>}
+          loading={<p>Maps Loading...</p>}
+        >
+          <MapDiv style={{ width: '70%', height: '70vh', display: 'flex', justifyContent: 'center' }}>
+            <MapContainer ref={mapRef} id="map">
+              <NaverMap
+                id="react-naver-maps-introduction"
+                style={{ width: '100%', height: '100vh' }}
+                center={{ lat: 36.604528, lng: 127.298399 }}
+                zoom={17}
+              >
+                <Marker
+                  position={{ lat: 36.604528, lng: 127.298399 }}
+                  onClick={() => {
+                    alert('마커 클릭됨!');
+                  }}
+                />
+              </NaverMap>
+            </MapContainer>
+          </MapDiv>
+        </NavermapsProvider>
       </Container>
     </>
   );
