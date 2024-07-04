@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import { NavermapsProvider } from 'react-naver-maps';
-import { Container as MapDiv, NaverMap, Marker } from 'react-naver-maps';
+import { NavermapsProvider,  } from 'react-naver-maps';
+import { Container as MapDiv, NaverMap, Marker, InfoWindow } from 'react-naver-maps';
+
 
 const TitleContainer = styled.div`
   display: flex;
@@ -55,6 +56,8 @@ const Container = styled.div`
 function MapPage() {
   const mapRef = useRef(null);
   const navigate = useNavigate();
+  const [infoWindowOpen, setInfoWindowOpen] = useState(false);
+  const [infoWindowPosition, setInfoWindowPosition] = useState({ lat: 0, lng: 0 });
 
   useEffect(() => {
     const { naver } = window;
@@ -69,6 +72,14 @@ function MapPage() {
     }
   }, []);
 
+  const handleMarkerClick = (position) => {
+    setInfoWindowPosition(position);
+    if(!infoWindowOpen)
+      setInfoWindowOpen(true);
+    else 
+      setInfoWindowOpen(false);
+  };
+
   return (
     <>
       <Header />
@@ -80,7 +91,7 @@ function MapPage() {
       <RedLine />
       <Container>
         <NavermapsProvider
-          ncpClientId={process.env.MY_CLIENT_ID} // 여기에 클라이언트 아이디를 입력하세요
+          ncpClientId={process.env.MY_CLIENT_ID}
           error={<p>Maps Load Error</p>}
           loading={<p>Maps Loading...</p>}
         >
@@ -94,10 +105,20 @@ function MapPage() {
               >
                 <Marker
                   position={{ lat: 36.604528, lng: 127.298399 }}
-                  onClick={() => {
-                    alert('마커 클릭됨!');
-                  }}
+                  onClick={() => handleMarkerClick({ lat: 36.604528, lng: 127.298399 })}
                 />
+                {infoWindowOpen && (
+                  // alert("hi")
+                  <InfoWindow
+                    position={infoWindowPosition}
+                    onCloseClick={() => setInfoWindowOpen(false)}
+                  >
+                    <div>
+                      <h4>마커 정보</h4>
+                      <p>이곳은 특정 위치입니다.</p>
+                    </div>
+                  </InfoWindow>
+                )}
               </NaverMap>
             </MapContainer>
           </MapDiv>
