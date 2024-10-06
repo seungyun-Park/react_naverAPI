@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import InfoInput from '../components/InfoInput';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -56,6 +56,7 @@ function LoginPage(){
     const [ID, setID] = useState("");
     const [Password, setPassword] = useState("");
     const [loginCheck, setLoginCheck] = useState(false); // 로그인 상태 체크
+    const inputRef = useRef();
 
     const onIDHandler = (event) => {
       setID(event.currentTarget.value);
@@ -114,6 +115,10 @@ function LoginPage(){
       }
   };
 
+  useEffect(() => { 
+    inputRef.current.focus(); //바로 아이디 입력칸에 focus 넣기
+  },[])
+
     return (
       <Wrapper>
           {/* 로그인 페이지 상단에 로고 이미지 추가 */}
@@ -123,6 +128,7 @@ function LoginPage(){
             <br/>
             {/* 수정된 입력 필드 */}
             <StyledInput 
+              ref={inputRef}
               type='text' 
               placeholder='아이디' 
               value={ID} 

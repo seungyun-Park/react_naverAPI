@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import { NavermapsProvider } from 'react-naver-maps';
-import { Container as MapDiv, NaverMap, Marker, Polyline } from 'react-naver-maps';
+import { Container as MapDiv, NaverMap, Marker } from 'react-naver-maps';
 
 const TitleContainer = styled.div`
   display: flex;
@@ -108,11 +108,7 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
 
 function MapPage() {
   const mapRef = useRef(null);
-  const [map, setMap] = useState(null);
-  const [routeInfo, setRouteInfo] = useState(null);
-  const [path, setPath] = useState([]);
-  const [start, setStart] = useState('36.604528,127.298399');
-  const [end, setEnd] = useState('36.605,127.3');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const { naver } = window;
@@ -170,7 +166,7 @@ function MapPage() {
     if (map) {
       fetchDirections();
     }
-  }, [map]);
+  }, []);
 
   return (
     <>
@@ -196,32 +192,25 @@ function MapPage() {
       </InputContainer>
       <Container>
         <NavermapsProvider
-          ncpClientId={process.env.REACT_APP_NAVER_CLIENT_ID}
+          ncpClientId={process.env.MY_CLIENT_ID} // 여기에 클라이언트 아이디를 입력하세요
           error={<p>Maps Load Error</p>}
           loading={<p>Maps Loading...</p>}
         >
           <MapDiv style={{ width: '70%', height: '70vh', display: 'flex', justifyContent: 'center' }}>
-            <MapContainer ref={mapRef} id="map" style={{ width: '100%', height: '100%' }}>
-              {map && (
-                <>
-                  <Marker
-                    position={new window.naver.maps.LatLng(...start.split(','))}
-                    map={map}
-                  />
-                  <Marker
-                    position={new window.naver.maps.LatLng(...end.split(','))}
-                    map={map}
-                  />
-                  {path.length > 0 && (
-                    <Polyline
-                      path={path}
-                      strokeColor={'#5347AA'}
-                      strokeWeight={5}
-                      map={map}
-                    />
-                  )}
-                </>
-              )}
+            <MapContainer ref={mapRef} id="map">
+              <NaverMap
+                id="react-naver-maps-introduction"
+                style={{ width: '100%', height: '100vh' }}
+                center={{ lat: 36.604528, lng: 127.298399 }}
+                zoom={17}
+              >
+                <Marker
+                  position={{ lat: 36.604528, lng: 127.298399 }}
+                  onClick={() => {
+                    alert('마커 클릭됨!');
+                  }}
+                />
+              </NaverMap>
             </MapContainer>
           </MapDiv>
         </NavermapsProvider>
